@@ -8,3 +8,9 @@ output: html_notebook
 dataset = read.csv("Data.csv")
 head(dataset)
 
+X = dataset[,1:length(dataset)-1]
+X
+length(dataset)# length of DataFrame.coloums
+
+Y = dataset[,length(dataset)]
+Y
