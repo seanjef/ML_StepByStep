@@ -14,3 +14,15 @@ length(dataset)# length of DataFrame.coloums
 
 Y = dataset[,length(dataset)]
 Y
+
+
+#taking care of missing data
+#ifelse(booleanExp, T-process, F-process) 很像三元運算子
+dataset$Age = ifelse(is.na(dataset$Age),
+                     ave(dataset$Age, FUN=function(x) mean(x, na.rm = TRUE)),
+                     dataset$Age)
+
+dataset$Salary = ifelse(is.na(dataset$Salary),
+                     ave(dataset$Salary, FUN=function(x) mean(x, na.rm = TRUE)),
+                     dataset$Salary)
+dataset

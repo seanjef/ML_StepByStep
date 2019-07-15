@@ -1779,7 +1779,7 @@ output: html_notebook</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2J5IGRlZmF1bHQgbmFtaW5nIGlzIGJhZCwgc28gSSB1c2VkIFIgc3R1ZGlvIHNldCB3b3JraW5nIGRpcmVjdG9yeSB0byByZXBsYWNlIHRoaXMgb3BlcmF0aW9uXG4jc2V0d2QoXCJEOlxcXFxBSV9Eb2NzXFxVZGVteVxcTUxfQS1aXFxNYWNoaW5lIExlYXJuaW5nIEEtWiBUZW1wbGF0ZSBGb2xkZXJcXFxcUGFydCAxIC0gRGF0YSBQcmVwcm9jZXNzaW5nXFxcXFNlY3Rpb24gMiAtLS0tLS0tLS0tLS0tLS0tLS0tLSBQYXJ0IDEgLSBEYXRhIFByZXByb2Nlc3NpbmcgLS0tLS0tLS0tLS0tLS0tLS0tLS1cIilcblxuZGF0YXNldCA9IHJlYWQuY3N2KFwiRGF0YS5jc3ZcIilcbmhlYWQoZGF0YXNldClcblxuWCA9IGRhdGFzZXRbLDE6bGVuZ3RoKGRhdGFzZXQpLTFdXG5YXG5sZW5ndGgoZGF0YXNldCkjIGxlbmd0aCBvZiBEYXRhRnJhbWUuY29sb3Vtc1xuXG5ZID0gZGF0YXNldFssbGVuZ3RoKGRhdGFzZXQpXVxuWVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2J5IGRlZmF1bHQgbmFtaW5nIGlzIGJhZCwgc28gSSB1c2VkIFIgc3R1ZGlvIHNldCB3b3JraW5nIGRpcmVjdG9yeSB0byByZXBsYWNlIHRoaXMgb3BlcmF0aW9uXG4jc2V0d2QoXCJEOlxcXFxBSV9Eb2NzXFxVZGVteVxcTUxfQS1aXFxNYWNoaW5lIExlYXJuaW5nIEEtWiBUZW1wbGF0ZSBGb2xkZXJcXFxcUGFydCAxIC0gRGF0YSBQcmVwcm9jZXNzaW5nXFxcXFNlY3Rpb24gMiAtLS0tLS0tLS0tLS0tLS0tLS0tLSBQYXJ0IDEgLSBEYXRhIFByZXByb2Nlc3NpbmcgLS0tLS0tLS0tLS0tLS0tLS0tLS1cIilcblxuZGF0YXNldCA9IHJlYWQuY3N2KFwiRGF0YS5jc3ZcIilcbmhlYWQoZGF0YXNldClcblxuWCA9IGRhdGFzZXRbLDE6bGVuZ3RoKGRhdGFzZXQpLTFdXG5YXG5sZW5ndGgoZGF0YXNldCkjIGxlbmd0aCBvZiBEYXRhRnJhbWUuY29sb3Vtc1xuXG5ZID0gZGF0YXNldFssbGVuZ3RoKGRhdGFzZXQpXVxuWVxuXG5cbiN0YWtpbmcgY2FyZSBvZiBtaXNzaW5nIGRhdGFcbiNpZmVsc2UoYm9vbGVhbkV4cCwgVC1wcm9jZXNzLCBGLXByb2Nlc3MpIOW+iOWDj+S4ieWFg+mBi+eul+WtkFxuZGF0YXNldCRBZ2UgPSBpZmVsc2UoaXMubmEoZGF0YXNldCRBZ2UpLFxuICAgICAgICAgICAgICAgICAgICAgYXZlKGRhdGFzZXQkQWdlLCBGVU49ZnVuY3Rpb24oeCkgbWVhbih4LCBuYS5ybSA9IFRSVUUpKSxcbiAgICAgICAgICAgICAgICAgICAgIGRhdGFzZXQkQWdlKVxuXG5kYXRhc2V0JFNhbGFyeSA9IGlmZWxzZShpcy5uYShkYXRhc2V0JFNhbGFyeSksXG4gICAgICAgICAgICAgICAgICAgICBhdmUoZGF0YXNldCRTYWxhcnksIEZVTj1mdW5jdGlvbih4KSBtZWFuKHgsIG5hLnJtID0gVFJVRSkpLFxuICAgICAgICAgICAgICAgICAgICAgZGF0YXNldCRTYWxhcnkpXG5kYXRhc2V0XG5gYGAifQ== -->
 <pre class="r"><code>#by default naming is bad, so I used R studio set working directory to replace this operation
 #setwd(&quot;D:\\AI_Docs\Udemy\ML_A-Z\Machine Learning A-Z Template Folder\\Part 1 - Data Preprocessing\\Section 2 -------------------- Part 1 - Data Preprocessing --------------------&quot;)
 
@@ -1791,13 +1791,25 @@ X
 length(dataset)# length of DataFrame.coloums
 
 Y = dataset[,length(dataset)]
-Y</code></pre>
+Y
+
+
+#taking care of missing data
+#ifelse(booleanExp, T-process, F-process) 很像三元運算子
+dataset$Age = ifelse(is.na(dataset$Age),
+                     ave(dataset$Age, FUN=function(x) mean(x, na.rm = TRUE)),
+                     dataset$Age)
+
+dataset$Salary = ifelse(is.na(dataset$Salary),
+                     ave(dataset$Salary, FUN=function(x) mean(x, na.rm = TRUE)),
+                     dataset$Salary)
+dataset</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2sgZm9yIE1MX0EtWiBzdGVwIGJ5IHN0ZXAgUGFydDEgRGF0YSBwcm9jZXNzaW5nIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCiNieSBkZWZhdWx0IG5hbWluZyBpcyBiYWQsIHNvIEkgdXNlZCBSIHN0dWRpbyBzZXQgd29ya2luZyBkaXJlY3RvcnkgdG8gcmVwbGFjZSB0aGlzIG9wZXJhdGlvbg0KI3NldHdkKCJEOlxcQUlfRG9jc1xVZGVteVxNTF9BLVpcTWFjaGluZSBMZWFybmluZyBBLVogVGVtcGxhdGUgRm9sZGVyXFxQYXJ0IDEgLSBEYXRhIFByZXByb2Nlc3NpbmdcXFNlY3Rpb24gMiAtLS0tLS0tLS0tLS0tLS0tLS0tLSBQYXJ0IDEgLSBEYXRhIFByZXByb2Nlc3NpbmcgLS0tLS0tLS0tLS0tLS0tLS0tLS0iKQ0KDQpkYXRhc2V0ID0gcmVhZC5jc3YoIkRhdGEuY3N2IikNCmhlYWQoZGF0YXNldCkNCg0KWCA9IGRhdGFzZXRbLDE6bGVuZ3RoKGRhdGFzZXQpLTFdDQpYDQpsZW5ndGgoZGF0YXNldCkjIGxlbmd0aCBvZiBEYXRhRnJhbWUuY29sb3Vtcw0KDQpZID0gZGF0YXNldFssbGVuZ3RoKGRhdGFzZXQpXQ0KWQ0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2sgZm9yIE1MX0EtWiBzdGVwIGJ5IHN0ZXAgUGFydDEgRGF0YSBwcm9jZXNzaW5nIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCiNieSBkZWZhdWx0IG5hbWluZyBpcyBiYWQsIHNvIEkgdXNlZCBSIHN0dWRpbyBzZXQgd29ya2luZyBkaXJlY3RvcnkgdG8gcmVwbGFjZSB0aGlzIG9wZXJhdGlvbg0KI3NldHdkKCJEOlxcQUlfRG9jc1xVZGVteVxNTF9BLVpcTWFjaGluZSBMZWFybmluZyBBLVogVGVtcGxhdGUgRm9sZGVyXFxQYXJ0IDEgLSBEYXRhIFByZXByb2Nlc3NpbmdcXFNlY3Rpb24gMiAtLS0tLS0tLS0tLS0tLS0tLS0tLSBQYXJ0IDEgLSBEYXRhIFByZXByb2Nlc3NpbmcgLS0tLS0tLS0tLS0tLS0tLS0tLS0iKQ0KDQpkYXRhc2V0ID0gcmVhZC5jc3YoIkRhdGEuY3N2IikNCmhlYWQoZGF0YXNldCkNCg0KWCA9IGRhdGFzZXRbLDE6bGVuZ3RoKGRhdGFzZXQpLTFdDQpYDQpsZW5ndGgoZGF0YXNldCkjIGxlbmd0aCBvZiBEYXRhRnJhbWUuY29sb3Vtcw0KDQpZID0gZGF0YXNldFssbGVuZ3RoKGRhdGFzZXQpXQ0KWQ0KDQoNCiN0YWtpbmcgY2FyZSBvZiBtaXNzaW5nIGRhdGENCiNpZmVsc2UoYm9vbGVhbkV4cCwgVC1wcm9jZXNzLCBGLXByb2Nlc3MpIOW+iOWDj+S4ieWFg+mBi+eul+WtkA0KZGF0YXNldCRBZ2UgPSBpZmVsc2UoaXMubmEoZGF0YXNldCRBZ2UpLA0KICAgICAgICAgICAgICAgICAgICAgYXZlKGRhdGFzZXQkQWdlLCBGVU49ZnVuY3Rpb24oeCkgbWVhbih4LCBuYS5ybSA9IFRSVUUpKSwNCiAgICAgICAgICAgICAgICAgICAgIGRhdGFzZXQkQWdlKQ0KDQpkYXRhc2V0JFNhbGFyeSA9IGlmZWxzZShpcy5uYShkYXRhc2V0JFNhbGFyeSksDQogICAgICAgICAgICAgICAgICAgICBhdmUoZGF0YXNldCRTYWxhcnksIEZVTj1mdW5jdGlvbih4KSBtZWFuKHgsIG5hLnJtID0gVFJVRSkpLA0KICAgICAgICAgICAgICAgICAgICAgZGF0YXNldCRTYWxhcnkpDQpkYXRhc2V0DQo=</div>
 
 
 
